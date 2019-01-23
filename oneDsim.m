@@ -18,14 +18,16 @@ C.kb = 1.3806504e-23;               % Boltzmann constant
 C.eps_0 = 8.854187817e-12;          % vacuum permittivity
 C.mu_0 = 1.2566370614e-6;           % vacuum permeability
 C.c = 299792458;                    % speed of light
-C.a = f / C.m_0;
+C.a = 0.01;
 
 for n = 1:nTime
     du = u + C.a * dt ; 
-    dx = du * dt
-    u = u + dv;
+    dx = ((du)^2 - u^2)/ (2 * C.a);
+    u = du;
     x = x + dx;
-    plot(x,5);
+    comet(x,5);
+    %plot(x,10)
+    drawnow
     grid on
 end
 
