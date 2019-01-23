@@ -20,14 +20,24 @@ C.mu_0 = 1.2566370614e-6;           % vacuum permeability
 C.c = 299792458;                    % speed of light
 C.a = 0.01;
 
-for n = 1:nTime
-    du = u + C.a * dt ; 
-    dx = ((du)^2 - u^2)/ (2 * C.a);
-    u = du;
-    x = x + dx;
-    comet(x,5);
-    %plot(x,10)
-    drawnow
-    grid on
-end
+x = zeros(1,100);
+u = zeros(1,100);
+%for n = 1: nSim
+    
+    for n = 2:nTime
+        du =  C.a * dt ;
+        dx = du * dt;
+      
+        x(n) = x(n-1) + dx;
+        u(n) = u(n-1) + du;
+        %comet(x,u);
+        plot(x(n),u(n),'-o');
+        drawnow
+        grid on
+    end
+    
+    
+    
+%end
+
 
