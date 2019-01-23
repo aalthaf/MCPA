@@ -22,32 +22,55 @@ C.a = 1;
 
 x = zeros(1,100);
 u = zeros(1,100);
+x1 = zeros(1,100);
+u1 = zeros(1,100);
 %for n = 1: nSim
-noe = 1;
-for n = 2:nTime
+x1(1) = 10;
     
-    r = randi([1 100],1,1);
-    du =  C.a * dt ;
-    dx = ((du+u(n-1))^2- (u(n-1))^2)/(2*C.a);
     
-    x(n) = x(n-1) + dx;
-    u(n) = u(n-1) + du;
-    %comet(x,u,or);
-    % plot(x(n),u(n))
-    plot(u,x,'or')
-    xlabel('velocity')
-    ylabel('distance')
-    title(['The drift velocity is ',num2str(u(n)), ' m/s'])
-    %drawnow
-    pause(0.5)
-    %hold on
-    grid on
-    
-    if(r <= 5)
-        u(n) = 0;
+    for n = 2:nTime
+        
+        r = randi([1 100],1,1);
+        r1 = randi([1 100],1,1);
+        du =  C.a * dt ;
+        dx = ((du+u(n-1))^2- (u(n-1))^2)/(2*C.a);
+        dx1 = ((du+u1(n-1))^2- (u1(n-1))^2)/(2*C.a);
+        %%%%%%%%%%%%%%%%%%%%%
+        x(n) = x(n-1) + dx;
+        u(n) = u(n-1) + du;
+        %%%%%%%%%%%%%%%%%%%%%
+        x1(n) = x1(n-1) + dx1;
+        u1(n) = u1(n-1) + du;
+        
+        %comet(x,u,or);
+        % plot(x(n),u(n))
+        plot(u,x,'or')
+        hold on
+        plot(u1,x1,'ob')
+        xlabel('velocity')
+        ylabel('distance')
+        title(['The drift velocity is ',num2str((u(n)+u1(n))/2), ' m/s'])
+        %drawnow
+        pause(0.5)
+        %hold on
+        grid on
+        
+        if(r <= 5)
+            u(n) = 0;
+        end
+        
+        if(r1<=5)
+            u1(n) =0;
+        end
+        
+        
     end
     
-end
+    
+    
+
+
+
 
     
     
